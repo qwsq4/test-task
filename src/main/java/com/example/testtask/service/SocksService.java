@@ -16,14 +16,7 @@ public class SocksService {
     private SocksRepository repository;
     private SocksMapper mapper;
 
-    public SocksDTO getSocks(SocksDTO exampleSocks) {
-        Socks socks = repository.findByColorAndCottonPart(exampleSocks.getColor(), exampleSocks.getCottonPart());
-        if (socks != null) {
-            return mapper.toDto(socks);
-        } else return null;
-    }
-
-    public int getSocksQuantity(String color, ComparisonOperator comparisonOperator, int cottonPart) {
+    public int getSocks(String color, ComparisonOperator comparisonOperator, int cottonPart) {
         try {
             switch (comparisonOperator) {
                 case EQUAL:

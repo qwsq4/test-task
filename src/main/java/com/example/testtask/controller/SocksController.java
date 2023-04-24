@@ -33,7 +33,7 @@ public class SocksController {
     @PostMapping("/outcome")
     public ResponseEntity deleteSocks(@RequestBody SocksDTO socksDto) {
         if (socksDto == null || socksDto.getCottonPart() < 0 || socksDto.getCottonPart() > 100
-                || socksDto.getQuantity() < 0 || service.getSocks(socksDto).getQuantity() - socksDto.getQuantity() < 0) {
+                || socksDto.getQuantity() < 0 || service.getSocks(socksDto.getColor(), ComparisonOperator.EQUAL, socksDto.getCottonPart()) - socksDto.getQuantity() < 0) {
             return ResponseEntity.badRequest().build();
         }
 
@@ -49,7 +49,7 @@ public class SocksController {
             return ResponseEntity.badRequest().build();
         }
 
-        int quantity = service.getSocksQuantity(color, comparisonOperator, cottonPart);
+        int quantity = service.getSocks(color, comparisonOperator, cottonPart);
 
         if (quantity < 0) {
             return ResponseEntity.internalServerError().build();
